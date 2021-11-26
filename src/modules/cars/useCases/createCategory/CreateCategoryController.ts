@@ -15,3 +15,6 @@ class CreateCategoryController {
         return response.status(201).send()
     }
 }
+
+
+export { CreateCategoryController }
