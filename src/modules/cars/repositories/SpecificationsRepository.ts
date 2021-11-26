@@ -24,6 +24,10 @@ class SpecificationsRepository implements ISpecificationRepository {
     return this.specifications.find(specification => specification.name === name);
   }
 
+  list(): Specification[] {
+    return this.specifications;
+
+}
   
 }
 
