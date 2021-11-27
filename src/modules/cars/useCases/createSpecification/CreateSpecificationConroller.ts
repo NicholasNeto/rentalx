@@ -1,0 +1,8 @@
+
+
+class CreateSpecificationConroller {
+
+}
+
+
+export { CreateSpecificationConroller }
