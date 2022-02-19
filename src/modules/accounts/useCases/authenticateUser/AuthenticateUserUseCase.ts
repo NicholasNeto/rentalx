@@ -47,9 +47,7 @@ class AuthenticateUserUseCase {
 
         return { user, token}
     }
-
-
-    
+ 
 }
 
 export { AuthenticateUserUseCase }
