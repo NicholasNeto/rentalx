@@ -1,7 +1,6 @@
 import { compare } from 'bcrypt'
 import { inject, injectable } from "tsyringe";
 import { sign } from 'jsonwebtoken' 
-import { CannotReflectMethodParameterTypeError, getRepository } from "typeorm";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 
 interface IRequest {
@@ -34,8 +33,9 @@ class AuthenticateUserUseCase {
         }
 
         // Senha está correta
-        const passwordMath = compare(password, user.password)
-        if (!passwordMath) {
+        const passwordMatch = await compare(password, user.password);
+
+        if (!passwordMatch) {
             throw new Error(`Email or password incorrect!`);
         }
 
@@ -45,7 +45,16 @@ class AuthenticateUserUseCase {
             expiresIn: '1d'
         })
 
-        return { user, token}
+
+        const tokenReturn: IResponse = {
+            token,
+            user: {
+               name: user.name,
+               email: user.email
+            }
+        }
+
+        return tokenReturn
     }
  
 }
