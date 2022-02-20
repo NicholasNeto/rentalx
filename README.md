@@ -19,3 +19,7 @@ classe, mantendo um ponto global de acesso ao seu objeto.
 # Injeção de dependencia
 
 --> tsyringe
+
+# Token | Autenticação com JWT.
+
+--> Autenticação de rotas, deve ser criado um middleware
