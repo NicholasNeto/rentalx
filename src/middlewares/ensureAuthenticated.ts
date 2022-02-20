@@ -19,7 +19,6 @@ export async function ensureAuthenticated(request: Request, response: Response, 
 
     try {
         const { sub: user_id } = verify(token, "cb7aad368fbbba2f70dffdae85fe1a2e") as IPayload
-        console.log("---> ", user_id)
 
         const userRepository = new UserRepository()
         const user = userRepository.findById(user_id)
@@ -28,7 +27,12 @@ export async function ensureAuthenticated(request: Request, response: Response, 
             throw new AppError("USer does not exists!", 401)
         }
 
+        request.user = {
+           id: user_id
+        } as 
+
         next()
+
     } catch (error) {
         throw new AppError("Invalid token", 401)
     }
