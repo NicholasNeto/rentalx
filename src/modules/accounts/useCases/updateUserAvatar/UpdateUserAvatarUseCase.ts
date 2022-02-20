@@ -1,11 +1,6 @@
-import { Response } from "express";
 import { inject, injectable } from "tsyringe";
-import { AppError } from "../../../../errors/AppError";
-import { UserRepository } from "../../repositories/implementations/UserRepository";
+import { deleteFile } from "../../../../utils/file";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
-
-
-
 interface IRequest {
     user_id: string;
     avatarFile: string;
@@ -19,9 +14,13 @@ class UpdateUserAvatarUseCase {
         private usersRepository: IUsersRepository
     ) { }
 
-    async excute({user_id, avatarFile}: IRequest) : Promise<void>{
-        const  user = await this.usersRepository.findById(user_id)
-        
+    async excute({ user_id, avatarFile }: IRequest): Promise<void> {
+        const user = await this.usersRepository.findById(user_id)
+
+        if (user.avatar) {
+            await deleteFile(`./tmp/avatar/${user.avatar}`)
+        }
+
         user.avatar = avatarFile
         await this.usersRepository.create(user)
     }
