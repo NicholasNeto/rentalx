@@ -8,6 +8,7 @@ import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase"
 let authenticateUserUseCase: AuthenticateUserUseCase;
 let userRepositoryInMemory: UsersRepositoryInMemory;
 let createUserUseCase: CreateUserUseCase;
+let user : ICreateUserDTO
 
 describe("Authenticate User", () => {
 
@@ -15,18 +16,18 @@ describe("Authenticate User", () => {
         userRepositoryInMemory = new UsersRepositoryInMemory()
         authenticateUserUseCase = new AuthenticateUserUseCase(userRepositoryInMemory)
         createUserUseCase = new CreateUserUseCase(userRepositoryInMemory)
-    })
 
-    it('should be able to authenticate an user', async () => {
-        const user : ICreateUserDTO = {
+        user = {
             name: "User Teste",
             password: "1234",
             email: "user@teste.com",
             driver_license: "1313"
         }
+    })
+
+    it('should be able to authenticate an user', async () => {
 
         await createUserUseCase.execute(user)
-
         const result = await authenticateUserUseCase.execute({
             email: user.email,
             password: user.password
@@ -36,7 +37,7 @@ describe("Authenticate User", () => {
     })
 
 
-    it('should be able not to authenticate an nonexistent user', async () => {
+    it('should not be able to authenticate an nonexistent user', async () => {
         
         expect( async () => {
             const result = await authenticateUserUseCase.execute({
@@ -46,20 +47,10 @@ describe("Authenticate User", () => {
         }).rejects.toBeInstanceOf(AppError)
     })
 
-
-
     it('should not be able to authenticate with incorrect password', () => {
         expect( async () => {
 
-            const user : ICreateUserDTO = {
-                name: "User Teste",
-                 password: "1234",
-                email: "user@teste.com",
-                driver_license: "1313"
-            }
-    
-            await createUserUseCase.execute(user)
-    
+            await createUserUseCase.execute(user)    
             await authenticateUserUseCase.execute({
                 email: user.email,
                 password: "0000"
