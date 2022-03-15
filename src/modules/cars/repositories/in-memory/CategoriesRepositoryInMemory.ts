@@ -1,7 +1,6 @@
-import { Category } from "../../entities/Category";
+// import { Category } from "../../entities/Category";
+import { Category } from "@modeles/cars/infra/typeorm/entities/Category";
 import { ICategoriesRepository, ICreateCategoryDTO } from "../ICategoriesRepository";
-
-
 
 class CategoriesRepositoryInMemory implements ICategoriesRepository {
 
