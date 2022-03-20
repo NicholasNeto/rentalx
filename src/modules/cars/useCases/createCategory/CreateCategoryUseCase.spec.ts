@@ -34,7 +34,7 @@ describe("Create Category ", () => {
             })
     
             await createCategoryUseCase.execute({
-                name: "Category Test",
+                name: "Category Test  asas",
                 description: "Description Category Test"
             })
         }).rejects.toBeInstanceOf(AppError)
