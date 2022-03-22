@@ -25,6 +25,10 @@ classe, mantendo um ponto global de acesso ao seu objeto.
 --> Autenticação de rotas, deve ser criado um middleware
 
 
+
+# SEED
+ --> Conceito ?
+
 # Cdastro de Carro
 
 **Requitisot Funcionais**
