@@ -21,3 +21,5 @@ async function create() {
 }
 
 create().then(() => console.log("User admin created!"))
+
+
