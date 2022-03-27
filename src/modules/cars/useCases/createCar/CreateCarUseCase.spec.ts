@@ -8,7 +8,7 @@ let createCarUseCase: CreateCarUseCase;
 let carsRepositoryInMemory: CarsRepositoryInMemory
 
 
-describe.only("Create Car", () => {
+describe("Create Car", () => {
 
     beforeEach(() => {
         carsRepositoryInMemory = new CarsRepositoryInMemory()
