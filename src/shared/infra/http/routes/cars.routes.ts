@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { CreateCarController } from '@modeles/cars/useCases/createCar/CreateCarController'
-import { ListAvailableCarsController } from '@modeles/cars/useCases/listCars/ListCarsController'
+import { ListAvailableCarsController } from '@modeles/cars/useCases/listAvailableCars/ListCarsController'
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
 import { ensureAdmin } from '../middlewares/ensureAdmin'
 
