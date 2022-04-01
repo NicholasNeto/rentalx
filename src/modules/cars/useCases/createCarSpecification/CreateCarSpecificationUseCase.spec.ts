@@ -1,19 +1,25 @@
 
 import { Car } from "@modeles/cars/infra/typeorm/entities/Car";
+import { SpecificationsRepository } from "@modeles/cars/infra/typeorm/repositories/SpecificationsRepository";
 import { CarsRepositoryInMemory } from "@modeles/cars/repositories/in-memory/CarsRepositoryInMemory";
+import { SpecificationsRepositoryInMemory } from "@modeles/cars/repositories/in-memory/SpecificationsRepositoryInMemory";
 
 import { AppError } from "@shared/errors/AppError";
 import { CreateCarSpecificationUseCase } from "./CreateCarSpecificationUseCase";
 
 let createCarSpecificationUseCase: CreateCarSpecificationUseCase;
 let carsRepositoryInMemory: CarsRepositoryInMemory
+let specificationsRepositoryInMemory : SpecificationsRepositoryInMemory
 
 
 describe("Create Car Specification", () => {
 
     beforeEach(() => {
         carsRepositoryInMemory = new CarsRepositoryInMemory()
-        createCarSpecificationUseCase = new CreateCarSpecificationUseCase(carsRepositoryInMemory)
+        specificationsRepositoryInMemory = new  SpecificationsRepositoryInMemory()
+        createCarSpecificationUseCase = new CreateCarSpecificationUseCase(
+            carsRepositoryInMemory,
+            specificationsRepositoryInMemory )
     })
 
     it("should not be able to add a new specification to a now-existent car", async () => {
@@ -33,7 +39,7 @@ describe("Create Car Specification", () => {
 
     it("should be able to add a new specification to the car", async () => {
         expect(async () => {
-            const specifications_id = ["54321"]
+//             const specifications_id = ["54321"]
         
             const car = await carsRepositoryInMemory.create({
                 name: "Name Car",
@@ -44,7 +50,17 @@ describe("Create Car Specification", () => {
                 brand: "Brand Car",
                 category_id: "category"
             })
-    
+
+
+            const specification = await specificationsRepositoryInMemory.create({
+                description: "test",
+                name: "test,"
+            })
+
+            const specifications_id = [specification.id]
+
+            console.log("specifications_id", specifications_id)
+
             await createCarSpecificationUseCase.execute({
                 car_id: car.id,
                 specifications_id
