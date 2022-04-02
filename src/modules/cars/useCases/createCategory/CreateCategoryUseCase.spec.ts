@@ -26,6 +26,8 @@ describe("Create Category ", () => {
 
     })
 
+    
+
     it('should not be able to create a new category with name exits', async () => {
         expect( async () => {
             await createCategoryUseCase.execute({
@@ -34,11 +36,12 @@ describe("Create Category ", () => {
             })
     
             await createCategoryUseCase.execute({
-                name: "Category Test  asas",
+                name: "Category Test",
                 description: "Description Category Test"
             })
         }).rejects.toBeInstanceOf(AppError)
     })
 
+    
 
 })

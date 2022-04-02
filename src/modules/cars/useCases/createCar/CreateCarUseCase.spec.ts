@@ -31,7 +31,7 @@ describe("Create Car", () => {
         expect(carCreated).toHaveProperty('id')
 
     })
-
+    
     it("shold not be able to create a car with exists licenseplate", () => {
         expect(async () => {
             await createCarUseCase.execute({
@@ -56,6 +56,8 @@ describe("Create Car", () => {
 
         }).rejects.toBeInstanceOf(AppError)
     })
+
+    
 
     it("shold be able to create a car with available true", async () => {
 

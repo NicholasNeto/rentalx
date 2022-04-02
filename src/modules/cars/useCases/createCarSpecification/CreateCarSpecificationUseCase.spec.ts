@@ -5,6 +5,7 @@ import { CarsRepositoryInMemory } from "@modeles/cars/repositories/in-memory/Car
 import { SpecificationsRepositoryInMemory } from "@modeles/cars/repositories/in-memory/SpecificationsRepositoryInMemory";
 
 import { AppError } from "@shared/errors/AppError";
+import { Any } from "typeorm";
 import { CreateCarSpecificationUseCase } from "./CreateCarSpecificationUseCase";
 
 let createCarSpecificationUseCase: CreateCarSpecificationUseCase;
@@ -33,10 +34,9 @@ describe("Create Car Specification", () => {
                 specifications_id
             })
         }).rejects.toBeInstanceOf(AppError)
-
-
     })
 
+   
     it("should be able to add a new specification to the car", async () => {
         expect(async () => {
 //             const specifications_id = ["54321"]
@@ -61,10 +61,15 @@ describe("Create Car Specification", () => {
 
             console.log("specifications_id", specifications_id)
 
-            await createCarSpecificationUseCase.execute({
+            const specificationsCars = await createCarSpecificationUseCase.execute({
                 car_id: car.id,
                 specifications_id
             })
+
+
+            console.log("specificationsCars : ", specificationsCars)
+            expect.any(specificationsCars)
+
         }).toBeTruthy()
 
     })
