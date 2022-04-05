@@ -1,6 +1,4 @@
 import { Car } from "@modeles/cars/infra/typeorm/entities/Car";
-import { Specification } from "@modeles/cars/infra/typeorm/entities/Specification";
-import { SpecificationsRepository } from "@modeles/cars/infra/typeorm/repositories/SpecificationsRepository";
 import { ICarsRepository } from "@modeles/cars/repositories/ICarsRepository";
 import { ISpecificationRepository } from "@modeles/cars/repositories/ISpecificationsRepository";
 import { AppError } from "@shared/errors/AppError";

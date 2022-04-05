@@ -1,6 +1,4 @@
 
-import { Car } from "@modeles/cars/infra/typeorm/entities/Car";
-import { SpecificationsRepository } from "@modeles/cars/infra/typeorm/repositories/SpecificationsRepository";
 import { CarsRepositoryInMemory } from "@modeles/cars/repositories/in-memory/CarsRepositoryInMemory";
 import { SpecificationsRepositoryInMemory } from "@modeles/cars/repositories/in-memory/SpecificationsRepositoryInMemory";
 
@@ -57,18 +55,15 @@ describe("Create Car Specification", () => {
                 name: "test,"
             })
 
-            const specifications_id = [specification.id]
-
-            console.log("specifications_id", specifications_id)
+            const specifications_id = [ specification.id] ;
 
             const specificationsCars = await createCarSpecificationUseCase.execute({
                 car_id: car.id,
                 specifications_id
             })
 
-
-            console.log("specificationsCars : ", specificationsCars)
-            expect.any(specificationsCars)
+            expect(specificationsCars).toHaveProperty('specifications')
+            expect(specificationsCars.specifications.length).toBe(1)
 
         }).toBeTruthy()
 
