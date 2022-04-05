@@ -1,21 +1,22 @@
+import { inject, injectable } from "tsyringe";
 import { Car } from "@modeles/cars/infra/typeorm/entities/Car";
 import { ICarsRepository } from "@modeles/cars/repositories/ICarsRepository";
 import { ISpecificationRepository } from "@modeles/cars/repositories/ISpecificationsRepository";
 import { AppError } from "@shared/errors/AppError";
-
 
 interface IRequest {
     car_id: string;
     specifications_id: string[];
 }
 
-
-// @injectable()
+ @injectable()
 class CreateCarSpecificationUseCase {
 
     constructor(
-        // @inject("CarsRepository")
+        @inject("CarsRepository")
         private carsRepository: ICarsRepository,
+
+        @inject("SpecificationsRepository")
         private specificationsRepository: ISpecificationRepository
     ){}
 
