@@ -7,7 +7,7 @@ interface IFiles {
     filename: string;
 }
 
-class UploadCarImageController {
+class UploadCarImagesController {
   async handle(request: Request, response: Response): Promise<Response>{
 
     const { id } = request.params;
@@ -26,4 +26,4 @@ class UploadCarImageController {
   }
 }
 
-export { UploadCarImageController } 
+export { UploadCarImagesController } 
