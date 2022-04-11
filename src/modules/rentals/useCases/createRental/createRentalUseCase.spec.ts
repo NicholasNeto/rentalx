@@ -2,9 +2,12 @@ import dayjs from 'dayjs'
 import { RentalsRepositoryInMemory } from "@modeles/rentals/repositories/in-memory/RentalsRepositoryInMemory"
 import { AppError } from "@shared/errors/AppError"
 import { CreateRentalUseCase } from "./createRentalUseCase"
+import { DateProvider } from '@shared/container/providers/DateProvider/implementations/DateProvider'
 
 let createRentalUseCase: CreateRentalUseCase
 let rentalsRepositoryInMemory: RentalsRepositoryInMemory
+let dayjsDateProvider: DateProvider
+
 
 describe("Create Rental", () => {
 
@@ -12,8 +15,10 @@ describe("Create Rental", () => {
 
     beforeEach(() => {
         rentalsRepositoryInMemory = new RentalsRepositoryInMemory
+        dayjsDateProvider = new DateProvider()
         createRentalUseCase = new CreateRentalUseCase(
-            rentalsRepositoryInMemory
+            rentalsRepositoryInMemory,
+            dayjsDateProvider
         );
     })
 
