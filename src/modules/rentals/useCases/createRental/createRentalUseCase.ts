@@ -2,6 +2,7 @@ import { Rental } from "@modeles/rentals/infra/typeorm/entities/Rental";
 import { IRentalRepository } from "@modeles/rentals/repositories/IRentalRepository";
 import { IDateProvider } from "@shared/container/providers/DateProvider/IDateProvider";
 import { AppError } from "@shared/errors/AppError";
+import { inject, injectable } from "tsyringe";
 
 
 interface IRequest {
@@ -10,11 +11,13 @@ interface IRequest {
     expected_return_date: Date;
 }
 
-
+@injectable()
 class CreateRentalUseCase {
 
     constructor(
+        @inject("RentalsRepository")
         private rentalRepository: IRentalRepository,
+        @inject("DateProvider")
         private dateProvider: IDateProvider
 
     ) { }
