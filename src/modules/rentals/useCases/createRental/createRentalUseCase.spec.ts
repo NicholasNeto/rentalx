@@ -29,8 +29,6 @@ describe("Create Rental", () => {
             expected_return_date: DAY_ADD_24_HOURS
         })
 
-        console.log('rental', rental)
-
         expect(rental).toHaveProperty("id")
         expect(rental).toHaveProperty("start_date")
 
